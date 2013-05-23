@@ -1,57 +1,184 @@
-# Speedbag
+# Locale Selector
 
-A grunt coffee/less/live-reload/cssmin/uglify/connect/bootstrap/zepto/lodash boilerplate.
+O seletor front end de línguas.
 
-Check out the [live demo](http://vtex.github.io/speedbag)
+Baixe o repositório e instale as dependências:
 
-Requires [node](http://nodejs.org/) and [grunt](http://gruntjs.com/) (`npm i -g grunt-cli`).
+```console
+npm i -g grunt-cli
+npm i
+grunt
+```
 
-### Speedstart
+Você poderá vê-lo em ação em `http://localhost:9001/`.
 
-    npm i
-    grunt
+## Setup
 
-Have fun! Changes to your coffee, less or html files will reload the page automatically. Nice.
+Primeiramente carregue todas as [dependências](#dependncias) Javascript. Em seguida, carregue seus arquivos de translations. Você pode encontrar um exemplo do formato a ser seguido em `/src/coffee/translation-en-US.coffee`.
 
-The compiled files can be found in the `/build` folder.
+Agora é só inicar o plugin no evento de `$(document).ready()` do jQuery com a função `vtex.i18n.init()`.
 
-### Production build
 
-    grunt prod
+Para traduzir um elemento na página, adicione o atributo `data-i18n` com o valor da chave do arquivo de translation. Por exemplo:
 
-### Deployment build
+```html
+<p data-i18n="chave"></p>
+```
+	
+Caso queira traduzir um atributo do elemento HTML, como o atributo `title`, `alt` ou `placeholder`. Use o seguinte formato:
 
-    grunt deploy:master
+```html
+<a data-i18n="[title]chave"></a>
+```
 
-Have a look at the newly created deploy/master/index.html file.
+Caso não queira ter um select para o usuário final trocar de língua, apenas não inclua o elemento com o id `#vtex-locale-selector`, tudo continuará a funcionar normalmente. Ou seja, você ainda poderá usar a API por Javascript.
 
-### Folder structure
+## API
 
-- `src` - most of your files will be here.
-	- `coffee` - CoffeeScript source files
-	- `style` - CSS and LESS source files
-	- `lib` - Third-party libs
-	- `index.html` - Your app entry point.
-- `test` - Unit tests source files.
-- `Gruntfile.coffee` - This is the configuration file for grunt. Contains all the build tasks.
-- `remote.json` - The configuration file for [Remote](https://github.com/gadr90/remote), if you need it.
-- `build` - this folder will be created after you run a grunt task.
-	-   `index.debug.html` - this is the same index as generated on the dev task. Useful for debugging in production.
-- `deploy` - this folder contains a deploy-ready, commit-hash-versioned folder of your app
-    -   `<git-commit-hash>` - the name of this folder is the hash of your current commit
-    -   `<env>` - this folder contains only the necessary files for referencing your app - in this case, the index is enough
+<h4 id="init"><code>vtex.i18n.init(locale)</code></h4>
+<p>Inicia o plugin.</p>
+<table class="table table-bordered table-striped">
+	<thead>
+		<tr>
+			<th style="width: 90px;">Param</th>
+			<th style="width: 50px;">tipo</th>
+			<th style="width: 140px;">exemplo</th>
+			<th>descrição</th>
+		</tr>
+	</thead>
+	<tbody>
+		<tr>
+			<td>locale</td>
+			<td>string</td>
+			<td><code>"pt-BR"</code> (opcional)</td>
+			<td>Inicia com um locale específico.</td>
+		</tr>
+	</tbody>
+</table>
 
-### A Thousand Words
+<br>
 
-![Structure](speedbag.png)
+<h4 id="setLocaleCallback"><code>vtex.i18n.setLocaleCallback(callback)</code></h4>
+<p>Seta uma função de callback ao trocar a língua.</p>
+<table class="table table-bordered table-striped">
+	<thead>
+		<tr>
+			<th style="width: 90px;">Param</th>
+			<th style="width: 50px;">tipo</th>
+			<th style="width: 140px;">exemplo</th>
+			<th>descrição</th>
+		</tr>
+	</thead>
+	<tbody>
+		<tr>
+			<td>callback</td>
+			<td>function ou string</td>
+			<td>função ou <code>"vtex.i18n.update"</code></td>
+			<td>Caso seja do tipo <code>function</code>, o callback chamará a função passando como parametro o novo locale. Caso seja do tipo <code>string</code>, assume-se que será chamado um canal do Radio.<br> Ex: para o parametro do tipo string <code>vtex.i18n.update</code>, um possível callback a ser chamado seria: <code>radio('vtex.i18n.update').broadcast('pt-BR')</code></td>
+		</tr>
+	</tbody>
+</table>
 
-------
+<br>
 
-### Common issues:
+<h4 id="setLocale"><code>vtex.i18n.setLocale(locale)</code></h4>
+<p>Troca a língua corrente.</p>
+<table class="table table-bordered table-striped">
+	<thead>
+		<tr>
+			<th style="width: 90px;">Param</th>
+			<th style="width: 50px;">tipo</th>
+			<th style="width: 140px;">exemplo</th>
+			<th>descrição</th>
+		</tr>
+	</thead>
+	<tbody>
+		<tr>
+			<td>locale</td>
+			<td>string</td>
+			<td><code>"en-US"</code></td>
+			<td>Locale da língua a ser usada.</td>
+		</tr>
+	</tbody>
+</table>
 
-**EADDRINUSE** - Someone is already using one of the ports used by this app, either [connect](https://github.com/gruntjs/grunt-contrib-connect)'s 9001 or [LiveReload](https://github.com/gruntjs/grunt-contrib-livereload)'s 35729.
-Shut down interfering services or change the ports on Gruntfile.coffee.
+<br>
 
-------
+<h4 id="setCountryCodeCallback"><code>vtex.i18n.setCountryCodeCallback(callback)</code></h4>
+<p>Seta uma função de callback ao trocar o <code>countryCode</code>.</p>
+<table class="table table-bordered table-striped">
+	<thead>
+		<tr>
+			<th style="width: 90px;">Param</th>
+			<th style="width: 50px;">tipo</th>
+			<th style="width: 140px;">exemplo</th>
+			<th>descrição</th>
+		</tr>
+	</thead>
+	<tbody>
+		<tr>
+			<td>callback</td>
+			<td>function ou string</td>
+			<td>função ou <code>"vtex.countryCode.update"</code></td>
+			<td>Caso seja do tipo <code>function</code>, o callback chamará a função passando como parametro o novo <code>countryCode</code>. Caso seja do tipo <code>string</code>, assume-se que será chamado um canal do Radio.<br> Ex: para o parametro do tipo string <code>vtex.countryCode.update</code>, um possível callback a ser chamado seria: <code>radio('vtex.countryCode.update').broadcast('ARG')</code></td>
+		</tr>
+	</tbody>
+</table>
+
+<br>
+
+<h4 id="setCountryCode"><code>vtex.i18n.setCountryCode(countryCode)</code></h4>
+<p>Troca o countryCode a ser usado pela função <code>vtex.i18n.getCurrencySymbol</code></p>
+<table class="table table-bordered table-striped">
+	<thead>
+		<tr>
+			<th style="width: 90px;">Param</th>
+			<th style="width: 50px;">tipo</th>
+			<th style="width: 140px;">exemplo</th>
+			<th>descrição</th>
+		</tr>
+	</thead>
+	<tbody>
+		<tr>
+			<td>countryCode</td>
+			<td>string</td>
+			<td><code>"USA"</code></td>
+			<td><code>countryCode</code> do país.</td>
+		</tr>
+	</tbody>
+</table>
+
+<br>
+
+<h4 id="getCurrencySymbol"><code>vtex.i18n.getCurrencySymbol(countryCode)</code></h4>
+<p>Retorna o símbolo monetário do país.</p>
+<table class="table table-bordered table-striped">
+	<thead>
+		<tr>
+			<th style="width: 90px;">Param</th>
+			<th style="width: 50px;">tipo</th>
+			<th style="width: 140px;">exemplo</th>
+			<th>descrição</th>
+		</tr>
+	</thead>
+	<tbody>
+		<tr>
+			<td>countryCode</td>
+			<td>string</td>
+			<td><code>"ARG"</code> (opcional)</td>
+			<td>Tem como default o valor de <code>vtex.i18n.countryCode</code> ou pelo <code>countryCode</code> passado como parametro.</td>
+		</tr>
+	</tbody>
+</table>
+
+### Dependências
+
+- [jQuery](http://jquery.com/)
+- [Select2](http://ivaynberg.github.io/select2/)
+- [i18next](http://i18next.com/)
+
+Podendo ser extensível com a biblioteca de pub/sub [Radio.js](http://radio.uxder.com/).
+
+-------
 
 VTEX - 2013
