@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+	<title>VTEX Locale Selector</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta name="description" content="VTEX Locale Selector">
+	<meta name="author" content="VTEX">
+    <!-- build:css style/style.css -->
+    <link rel="stylesheet" href="lib/bootstrap/css/bootstrap.css"/>
+    <link rel="stylesheet" href="lib/bootstrap/css/bootstrap-responsive.css"/>
+    <link rel="stylesheet" href="lib/select2/select2.css"/>
+    <link rel="stylesheet" href="style/main.css"/>
+    <!-- endbuild -->
+
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
+    <script>window.jQuery || document.write('<script src="lib/jquery/jquery-1.8.3.min.js">\x3C/script>')</script>
+</head>
+<body>
+<div class="container-narrow">
+	<div class="page-header">
+		<h1>VTEX Locale Selector <br><small>O seletor front end de línguas.</small></h1>		
+	</div>
+
+	<h2 id="comoUsar">Como usar</h2>
+	<p>Insira um elemento HTML com o id <code>#vtex-locale-selector</code>, inicie o plugin <code>vtex.i18n.init()</code> e faremos todo o resto.</p>
+	<div class="row-fluid">
+		<div class="well span6">
+			<blockquote>
+				<p data-i18n="testing">Testando, um, dois, três!</p>
+				<small data-i18n="someOneFamous">Alguem famoso</small>
+			</blockquote>
+			<div id="vtex-locale-selector">Placeholder</div>
+		</div>
+	</div>
+
+	<hr>
+
+	<h3 id="setup">Setup</h3>
+	<p>Primeiramente carregue todas as <a href="#dependencias">dependências</a> Javascript. Em seguida, carregue seus arquivos de translations. Você pode encontrar um exemplo do formato a ser seguido em <code>/src/coffee/translation-en-US.coffee</code>.</p>			
+	<p>Agora é só inicar o plugin no evento de <code>$(document).ready()</code> do jQuery com a função <code>vtex.i18n.init()</code>.</p>
+
+	<br>
+
+	<p>Para traduzir um elemento na página, adicione o atributo <code>data-i18n</code> com o valor da chave do arquivo de translation. Por exemplo:</p>
+<pre>
+&lt;p data-i18n="chave"&gt;&lt;/p&gt;
+</pre>
+	<p>Caso queira traduzir um atributo do elemento HTML, como o atributo <code>title</code>, <code>alt</code> ou <code>placeholder</code>. Use o seguinte formato:</p>
+<pre>
+&lt;a data-i18n="[title]chave"&gt;&lt;/a&gt;
+</pre>
+
+	<br>
+
+	<p>Caso não queira ter um select para o usuário final trocar de língua, apenas não inclua o elemento com o id <code>#vtex-locale-selector</code>, tudo continuará a funcionar normalmente. Ou seja, você ainda poderá usar a API por Javascript.</p>
+
+	<hr>
+
+	<h3 id="API">API</h3>
+
+	<h4 id="init"><code>vtex.i18n.init(locale)</code></h4>
+	<p>Inicia o plugin.</p>
+	<table class="table table-bordered table-striped">
+		<thead>
+			<tr>
+				<th style="width: 90px;">Param</th>
+				<th style="width: 50px;">tipo</th>
+				<th style="width: 140px;">exemplo</th>
+				<th>descrição</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr>
+				<td>locale</td>
+				<td>string</td>
+				<td><code>"pt-BR"</code> (opcional)</td>
+				<td>Inicia com um locale específico.</td>
+			</tr>
+		</tbody>
+	</table>
+
+	<h4 id="setLocaleCallback"><code>vtex.i18n.setLocaleCallback(callback)</code></h4>
+	<p>Seta uma função de callback ao trocar a língua.</p>
+	<table class="table table-bordered table-striped">
+		<thead>
+			<tr>
+				<th style="width: 90px;">Param</th>
+				<th style="width: 50px;">tipo</th>
+				<th style="width: 140px;">exemplo</th>
+				<th>descrição</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr>
+				<td>callback</td>
+				<td>function ou string</td>
+				<td>função ou <code>"vtex.i18n.update"</code></td>
+				<td>Caso seja do tipo <code>function</code>, o callback chamará a função passando como parametro o novo locale. Caso seja do tipo <code>string</code>, assume-se que será chamado um canal do Radio.<br> Ex: para o parametro do tipo string <code>vtex.i18n.update</code>, um possível callback a ser chamado seria: <code>radio('vtex.i18n.update').broadcast('pt-BR')</code></td>
+			</tr>
+		</tbody>
+	</table>
+
+	<h4 id="setLocale"><code>vtex.i18n.setLocale(locale)</code></h4>
+	<p>Troca a língua corrente.</p>
+	<table class="table table-bordered table-striped">
+		<thead>
+			<tr>
+				<th style="width: 90px;">Param</th>
+				<th style="width: 50px;">tipo</th>
+				<th style="width: 140px;">exemplo</th>
+				<th>descrição</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr>
+				<td>locale</td>
+				<td>string</td>
+				<td><code>"en-US"</code></td>
+				<td>Locale da língua a ser usada.</td>
+			</tr>
+		</tbody>
+	</table>
+
+	<h4 id="setCountryCodeCallback"><code>vtex.i18n.setCountryCodeCallback(callback)</code></h4>
+	<p>Seta uma função de callback ao trocar o <code>countryCode</code>.</p>
+	<table class="table table-bordered table-striped">
+		<thead>
+			<tr>
+				<th style="width: 90px;">Param</th>
+				<th style="width: 50px;">tipo</th>
+				<th style="width: 140px;">exemplo</th>
+				<th>descrição</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr>
+				<td>callback</td>
+				<td>function ou string</td>
+				<td>função ou <code>"vtex.countryCode.update"</code></td>
+				<td>Caso seja do tipo <code>function</code>, o callback chamará a função passando como parametro o novo <code>countryCode</code>. Caso seja do tipo <code>string</code>, assume-se que será chamado um canal do Radio.<br> Ex: para o parametro do tipo string <code>vtex.countryCode.update</code>, um possível callback a ser chamado seria: <code>radio('vtex.countryCode.update').broadcast('ARG')</code></td>
+			</tr>
+		</tbody>
+	</table>
+
+	<h4 id="setCountryCode"><code>vtex.i18n.setCountryCode(countryCode)</code></h4>
+	<p>Troca o countryCode a ser usado pela função <code>vtex.i18n.getCurrencySymbol</code></p>
+	<table class="table table-bordered table-striped">
+		<thead>
+			<tr>
+				<th style="width: 90px;">Param</th>
+				<th style="width: 50px;">tipo</th>
+				<th style="width: 140px;">exemplo</th>
+				<th>descrição</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr>
+				<td>countryCode</td>
+				<td>string</td>
+				<td><code>"USA"</code></td>
+				<td><code>countryCode</code> do país.</td>
+			</tr>
+		</tbody>
+	</table>
+
+	<h4 id="getCurrencySymbol"><code>vtex.i18n.getCurrencySymbol(countryCode)</code></h4>
+	<p>Retorna o símbolo monetário do país.</p>
+	<table class="table table-bordered table-striped">
+		<thead>
+			<tr>
+				<th style="width: 90px;">Param</th>
+				<th style="width: 50px;">tipo</th>
+				<th style="width: 140px;">exemplo</th>
+				<th>descrição</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr>
+				<td>countryCode</td>
+				<td>string</td>
+				<td><code>"ARG"</code> (opcional)</td>
+				<td>Tem como default o valor de <code>vtex.i18n.countryCode</code> ou pelo <code>countryCode</code> passado como parametro.</td>
+			</tr>
+		</tbody>
+	</table>			
+	
+	<hr>			
+
+	<h4 id="dependencias">Dependências</h4>
+	<ul>
+		<li><a href="http://jquery.com/">jQuery</a></li>
+		<li><a href="http://ivaynberg.github.io/select2/">Select2</a></li>
+		<li><a href="http://i18next.com/">i18next</a></li>
+	</ul>
+	<p>Podendo ser extensível com a biblioteca de pub/sub <a href="http://radio.uxder.com/">Radio.js</a>.</p>
+
+	<hr> 
+
+	<h4 id="radio">Usando com Radio.js</h4>
+	<p>Apenas inclua o Radio na página. Para setar os canais do Radio veja o exemplo de uso no arquivo <code>main.coffee</code>, ou aqui mesmo:</p>
+<pre>
+	radio('vtex.i18n.update').subscribe (val) =>
+		console.log("Radio callback chamado", val)
+
+	window.vtex.i18n.setLocaleCallback('vtex.i18n.update')
+	window.vtex.i18n.init()
+
+	radio('vtex.countryCode.submit').subscribe (data) ->
+		window.vtex.i18n.setCountryCode(data)
+		radio('vtex.countryCode.update').broadcast(data)
+
+	radio('vtex.i18n.submit').subscribe (data) ->
+		window.vtex.i18n.setLocale(data)
+		radio('vtex.i18n.update').broadcast(data)
+</pre>
+	<hr>
+	<div class="footer">
+		<p>VTEX 2013</p>
+	</div>
+</div>
+<script src="http://localhost:35729/livereload.js"></script>
+<!-- build:js js/lib.js -->
+<script type="text/javascript" src="lib/bootstrap/js/bootstrap.js"></script>
+<script type="text/javascript" src="lib/select2/select2.min.js"></script>
+<script type="text/javascript" src="lib/i18next-1.6.0.min.js"></script>
+<script type="text/javascript" src="lib/radio.min.js"></script>
+<!-- endbuild -->
+<!-- build:js js/app.js -->
+<script type="text/javascript" src="js/vtex-locale-selector.js"></script>
+<script type="text/javascript" src="js/translation-es-AR.js"></script>
+<script type="text/javascript" src="js/translation-en-US.js"></script>
+<script type="text/javascript" src="js/translation-pt-BR.js"></script>
+<script type="text/javascript" src="js/main.js"></script>
+<!-- endbuild -->
+</body>
+</html>
