@@ -4,7 +4,7 @@ $ ->
 	vtex.i18n.init()
 
 	# Com Radio
-	loadRadio = true # ligue isso para ver como fica com o Radio
+	loadRadio = false # ligue isso para ver como fica com o Radio
 	if window.radio and loadRadio
 		radio('vtex.i18n.update').subscribe (val) =>
 			console.log("Radio locale Callback chamado:", val)
