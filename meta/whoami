@@ -1,0 +1,4 @@
+{
+	"roots": ["/io/i18n"],
+	"hosts": ["vtexcommerce.com.br", "vtexcommercebeta.com.br"]
+}
