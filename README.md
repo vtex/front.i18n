@@ -1,4 +1,4 @@
-# Locale Selector
+# front i18n
 
 O seletor front end de línguas.
 
