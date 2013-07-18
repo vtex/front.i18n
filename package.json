@@ -21,6 +21,7 @@
 		"coffee-script": "~1.6.2",
 		"remote": "~0.2.5",
 		"bower": "~0.10.0",
+		"bower-installer": "~0.10.0",
 		"grunt-karma": "~0.4.4"
 	},
 	"repository": {
