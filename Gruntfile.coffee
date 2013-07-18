@@ -47,6 +47,16 @@ module.exports = (grunt) ->
 				src: ['**']
 				dest: '<%= deployDirectory %>/<%= versionName() %>/'
 
+			dist:
+				expand: true
+				flatten: true
+				cwd: 'build/<%= relativePath %>/'
+				src: [
+					'js/vtex-i18n.js', 'js/vtex-i18n.min.js', 
+					'js/vtex-locale-selector.js', 'js/vtex-locale-selector.min.js'
+				]
+				dest: 'dist/'
+
 		coffee:
 			main:
 				expand: true
@@ -72,6 +82,12 @@ module.exports = (grunt) ->
 
 		usemin:
 			html: 'build/<%= relativePath %>/index.html'
+
+		uglify:
+			dist:
+				files:
+					'build/js/vtex-i18n.min.js': ['build/js/vtex-i18n.js']
+					'build/js/vtex-locale-selector.min.js': ['build/js/vtex-locale-selector.js']
 
 		karma:
 			options:
@@ -150,6 +166,9 @@ module.exports = (grunt) ->
 
 	# TDD
 	grunt.registerTask 'tdd', ['dev', 'connect', 'remote', 'karma:unit', 'watch:test']
+
+	# Dist
+	grunt.registerTask 'dist', ['dev', 'uglify:dist', 'copy:dist']
 
 	# Generates version folder
 	grunt.registerTask 'gen-version', ->
