@@ -35,26 +35,8 @@ Caso não queira ter um select para o usuário final trocar de língua, apenas n
 
 ## API
 
-<h4 id="init"><code>vtex.i18n.init(locale)</code></h4>
+<h4 id="init"><code>vtex.i18n.init()</code></h4>
 <p>Inicia o plugin.</p>
-<table class="table table-bordered table-striped">
-	<thead>
-		<tr>
-			<th style="width: 90px;">Param</th>
-			<th style="width: 50px;">tipo</th>
-			<th style="width: 140px;">exemplo</th>
-			<th>descrição</th>
-		</tr>
-	</thead>
-	<tbody>
-		<tr>
-			<td>locale</td>
-			<td>string</td>
-			<td><code>"pt-BR"</code> (opcional)</td>
-			<td>Inicia com um locale específico.</td>
-		</tr>
-	</tbody>
-</table>
 
 <br>
 
@@ -104,6 +86,11 @@ Caso não queira ter um select para o usuário final trocar de língua, apenas n
 
 <br>
 
+<h4 id="getLocale"><code>vtex.i18n.getLocale()</code></h4>
+<p>Retorna o locale corrente.</p>
+
+<br>
+
 <h4 id="setCountryCodeCallback"><code>vtex.i18n.setCountryCodeCallback(callback)</code></h4>
 <p>Seta uma função de callback ao trocar o <code>countryCode</code>.</p>
 <table class="table table-bordered table-striped">
@@ -150,7 +137,12 @@ Caso não queira ter um select para o usuário final trocar de língua, apenas n
 
 <br>
 
-<h4 id="getCurrencySymbol"><code>vtex.i18n.getCurrencySymbol(countryCode)</code></h4>
+<h4 id="getCountryCode"><code>vtex.i18n.getCountryCode()</code></h4>
+<p>Retorna o countryCode corrente.</p>
+
+<br>
+
+<h4 id="getCurrencySymbol"><code>vtex.i18n.getCurrency(countryCode)</code></h4>
 <p>Retorna o símbolo monetário do país.</p>
 <table class="table table-bordered table-striped">
 	<thead>
@@ -166,7 +158,7 @@ Caso não queira ter um select para o usuário final trocar de língua, apenas n
 			<td>countryCode</td>
 			<td>string</td>
 			<td><code>"ARG"</code> (opcional)</td>
-			<td>Tem como default o valor de <code>vtex.i18n.countryCode</code> ou pelo <code>countryCode</code> passado como parametro.</td>
+			<td>Tem como default o valor de <code>vtex.i18n.getCountryCode</code> ou pelo <code>countryCode</code> passado como parametro.</td>
 		</tr>
 	</tbody>
 </table>
