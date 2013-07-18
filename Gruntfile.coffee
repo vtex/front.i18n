@@ -55,7 +55,7 @@ module.exports = (grunt) ->
 					'js/vtex-i18n.js', 'js/vtex-i18n.min.js', 
 					'js/vtex-locale-selector.js', 'js/vtex-locale-selector.min.js'
 				]
-				dest: 'dist/'
+				dest: 'dist/'			
 
 		coffee:
 			main:
@@ -168,7 +168,7 @@ module.exports = (grunt) ->
 	grunt.registerTask 'tdd', ['dev', 'connect', 'remote', 'karma:unit', 'watch:test']
 
 	# Dist
-	grunt.registerTask 'dist', ['dev', 'uglify:dist', 'copy:dist']
+	grunt.registerTask 'dist', ['prod', 'copy:dist']
 
 	# Generates version folder
 	grunt.registerTask 'gen-version', ->
