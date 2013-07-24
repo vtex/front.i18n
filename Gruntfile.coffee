@@ -22,7 +22,10 @@ module.exports = (grunt) ->
 		environmentType: process.env['ENVIRONMENT_TYPE'] or 'stable'
 		versionName: -> [grunt.config('acronym'), grunt.config('environmentName'), grunt.config('buildNumber'),
 										 grunt.config('environmentType')].join('-')
-		clean: ['build']
+		clean: 
+			main: ['build']
+			dist: ['build', 'dist']
+
 		copy:
 			main:
 				expand: true
@@ -52,16 +55,6 @@ module.exports = (grunt) ->
 				src: ['**', '!**/*.coffee']
 				dest: 'build/<%= relativePath %>/spec/'
 
-			dist:
-				expand: true
-				flatten: true
-				cwd: 'build/<%= relativePath %>/'
-				src: [
-					'js/vtex-i18n.js', 'js/vtex-i18n.min.js', 
-					'js/vtex-locale-selector.js', 'js/vtex-locale-selector.min.js'
-				]
-				dest: 'dist/'			
-
 		coffee:
 			main:
 				expand: true
@@ -75,6 +68,13 @@ module.exports = (grunt) ->
 				cwd: 'spec/'
 				src: ['**/*.coffee']
 				dest: 'build/<%= relativePath %>/spec/'
+				ext: '.js'
+
+			dist:
+				expand: true
+				cwd: 'src/coffee'
+				src: ['vtex-i18n.coffee', 'vtex-locale-selector.coffee']
+				dest: 'dist/<%= relativePath %>/'
 				ext: '.js'
 
 		less:
@@ -91,8 +91,8 @@ module.exports = (grunt) ->
 		uglify:
 			dist:
 				files:
-					'build/js/vtex-i18n.min.js': ['build/js/vtex-i18n.js']
-					'build/js/vtex-locale-selector.min.js': ['build/js/vtex-locale-selector.js']
+					'dist/vtex-i18n.min.js': ['dist/vtex-i18n.js']
+					'dist/vtex-locale-selector.min.js': ['dist/vtex-locale-selector.js']
 
 		karma:
 			options:
@@ -186,7 +186,7 @@ module.exports = (grunt) ->
 	grunt.registerTask 'tdd', ['dev', 'connect', 'remote', 'karma:unit', 'watch:test']
 
 	# Dist
-	grunt.registerTask 'dist', ['prod', 'copy:dist']
+	grunt.registerTask 'dist', ['clean', 'coffee:dist', 'uglify:dist']
 
 	# Tasks for deploy build
 	grunt.registerTask 'gen-commit', ['clean', 'copy:main', 'copy:test', 'coffee', 'less', 'copy:debug',
