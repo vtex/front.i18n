@@ -12,6 +12,7 @@
     function VtexI18n() {
       this.callCountryCodeCallback = __bind(this.callCountryCodeCallback, this);
       this.callLocaleCallback = __bind(this.callLocaleCallback, this);
+      this.translateHtml = __bind(this.translateHtml, this);
       this.getThousandsSeparator = __bind(this.getThousandsSeparator, this);
       this.getDecimalSeparator = __bind(this.getDecimalSeparator, this);
       this.getCurrency = __bind(this.getCurrency, this);
@@ -97,6 +98,15 @@
           return ',';
         default:
           return '.';
+      }
+    };
+
+    VtexI18n.prototype.translateHtml = function(selector) {
+      if (selector == null) {
+        selector = 'html';
+      }
+      if (window.i18n) {
+        return $(selector).i18n();
       }
     };
 

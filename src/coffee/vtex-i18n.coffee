@@ -63,6 +63,10 @@ class VtexI18n
 				return ','
 			else
 				return '.'
+
+	translateHtml: (selector = 'html') =>
+		$(selector).i18n() if window.i18n
+
 	###
 	# Caso o callback seja do tipo function, chama a função
 	# Caso seja do tipo string assume-se que será chamado um canal do Radio
