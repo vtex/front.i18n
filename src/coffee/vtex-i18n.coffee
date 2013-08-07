@@ -13,10 +13,10 @@ class VtexI18n
 
 	setLocale: (localeParam) =>
 		locale = localeParam
-		if window.i18n and $("#vtex-locale-select")[0]
+		if window.i18n
 			window.i18n.setLng(locale)
 			$('html').i18n()
-			$("#vtex-locale-select").select2("val", locale)
+			$("#vtex-locale-select").select2("val", locale) if $("#vtex-locale-select")[0]
 		@callLocaleCallback(locale)
 	
 	getCountryCode: =>

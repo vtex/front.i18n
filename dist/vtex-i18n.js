@@ -37,10 +37,12 @@
 
     VtexI18n.prototype.setLocale = function(localeParam) {
       locale = localeParam;
-      if (window.i18n && $("#vtex-locale-select")[0]) {
+      if (window.i18n) {
         window.i18n.setLng(locale);
         $('html').i18n();
-        $("#vtex-locale-select").select2("val", locale);
+        if ($("#vtex-locale-select")[0]) {
+          $("#vtex-locale-select").select2("val", locale);
+        }
       }
       return this.callLocaleCallback(locale);
     };
