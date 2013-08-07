@@ -12,6 +12,8 @@
     function VtexI18n() {
       this.callCountryCodeCallback = __bind(this.callCountryCodeCallback, this);
       this.callLocaleCallback = __bind(this.callLocaleCallback, this);
+      this.getThousandsSeparator = __bind(this.getThousandsSeparator, this);
+      this.getDecimalSeparator = __bind(this.getDecimalSeparator, this);
       this.getCurrency = __bind(this.getCurrency, this);
       this.setCountryCodeCallback = __bind(this.setCountryCodeCallback, this);
       this.setLocaleCallback = __bind(this.setLocaleCallback, this);
@@ -71,6 +73,30 @@
           return 'US$ ';
         default:
           return '$ ';
+      }
+    };
+
+    VtexI18n.prototype.getDecimalSeparator = function(countryCodeParam) {
+      countryCode = countryCodeParam ? countryCodeParam : window.vtex.i18n.getCountryCode();
+      switch (countryCode) {
+        case 'BRA':
+          return ',';
+        case 'USA':
+          return '.';
+        default:
+          return ',';
+      }
+    };
+
+    VtexI18n.prototype.getThousandsSeparator = function(countryCodeParam) {
+      countryCode = countryCodeParam ? countryCodeParam : window.vtex.i18n.getCountryCode();
+      switch (countryCode) {
+        case 'BRA':
+          return '.';
+        case 'USA':
+          return ',';
+        default:
+          return '.';
       }
     };
 

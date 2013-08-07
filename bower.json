@@ -1,6 +1,6 @@
 {
 	"name": "front.i18n",
-	"version": "0.1.1",
+	"version": "0.2.0",
 	"main": [
 		"dist/vtex-i18n.js", "dist/vtex-i18n.min.js",
 		"dist/vtex-locale-selector.js", "dist/vtex-locale-selector.min.js"
@@ -11,10 +11,10 @@
 		"i18next": "jamuhl/i18next"
 	},
 	"devDependencies": {
-		"bootstrap": "latest",
+		"bootstrap": "brenocalazans/bootstrap",
 		"radio": "uxder/Radio"
 	},
 	"install": {
-		"path": "src/lib/bower_modules"
+		"path": "src/lib/bower_components"
 	}
 }

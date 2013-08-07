@@ -122,6 +122,47 @@ describe 'i18n', ->
 
 			# Assert
 			expect(currency).toMatch(/US\$ /)
-		
-			
-		
+
+	describe 'decimal separator', ->
+
+		it 'should return the selected decimal separator by default', ->
+			# Arrange
+			vtex.i18n.setCountryCode('BRA')
+
+			# Act
+			decimalSeparator = vtex.i18n.getDecimalSeparator()
+
+			# Assert
+			expect(decimalSeparator).toMatch(/\,/)
+
+		it 'should return the specific decimal separator if countryCode is passed to function', ->
+			# Arrange
+			countryCode = 'USA'
+
+			# Act
+			decimalSeparator = vtex.i18n.getDecimalSeparator(countryCode)
+
+			# Assert
+			expect(decimalSeparator).toMatch(/\./)
+
+	describe 'thousands separator', ->
+
+		it 'should return the selected thousands separator by default', ->
+			# Arrange
+			vtex.i18n.setCountryCode('BRA')
+
+			# Act
+			decimalSeparator = vtex.i18n.getThousandsSeparator()
+
+			# Assert
+			expect(decimalSeparator).toMatch(/\./)
+
+		it 'should return the specific decimal separator if countryCode is passed to function', ->
+			# Arrange
+			countryCode = 'USA'
+
+			# Act
+			decimalSeparator = vtex.i18n.getThousandsSeparator(countryCode)
+
+			# Assert
+			expect(decimalSeparator).toMatch(/\,/)

@@ -43,6 +43,26 @@ class VtexI18n
 				return 'US$ '
 			else
 				return '$ '
+
+	getDecimalSeparator: (countryCodeParam) =>
+		countryCode = if countryCodeParam then countryCodeParam else window.vtex.i18n.getCountryCode()
+		switch countryCode
+			when 'BRA'
+				return ','
+			when 'USA'
+				return '.'
+			else
+				return ','
+
+	getThousandsSeparator: (countryCodeParam) =>
+		countryCode = if countryCodeParam then countryCodeParam else window.vtex.i18n.getCountryCode()
+		switch countryCode
+			when 'BRA'
+				return '.'
+			when 'USA'
+				return ','
+			else
+				return '.'
 	###
 	# Caso o callback seja do tipo function, chama a função
 	# Caso seja do tipo string assume-se que será chamado um canal do Radio
