@@ -65,7 +65,7 @@ class VtexI18n
 				return '.'
 
 	translateHtml: (selector = 'html') =>
-		$(selector).i18n() if window.i18n
+		$(selector).i18n?() if window.i18n
 
 	###
 	# Caso o callback seja do tipo function, chama a função
