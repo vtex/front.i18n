@@ -104,11 +104,12 @@
     };
 
     VtexI18n.prototype.translateHtml = function(selector) {
+      var _base;
       if (selector == null) {
         selector = 'html';
       }
       if (window.i18n) {
-        return $(selector).i18n();
+        return typeof (_base = $(selector)).i18n === "function" ? _base.i18n() : void 0;
       }
     };
 
