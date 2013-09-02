@@ -84,3 +84,6 @@ class VtexI18n
 			radio(@countryCodeCallback).broadcast(val)
 
 $.extend(window.vtex.i18n, new VtexI18n())
+
+# Compatibilidade com versões antigas
+window.vtex.i18n.getCurrencySymbol = window.vtex.i18n.getCurrency

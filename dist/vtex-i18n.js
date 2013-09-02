@@ -141,4 +141,6 @@
 
   $.extend(window.vtex.i18n, new VtexI18n());
 
+  window.vtex.i18n.getCurrencySymbol = window.vtex.i18n.getCurrency;
+
 }).call(this);
