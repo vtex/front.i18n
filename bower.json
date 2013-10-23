@@ -1,6 +1,6 @@
 {
 	"name": "front.i18n",
-	"version": "0.3.2",
+	"version": "0.3.3",
 	"main": [
 		"dist/vtex-i18n.js", "dist/vtex-i18n.min.js",
 		"dist/vtex-locale-selector.js", "dist/vtex-locale-selector.min.js"
