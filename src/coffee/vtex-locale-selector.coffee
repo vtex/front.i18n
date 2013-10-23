@@ -16,7 +16,7 @@ window.vtex.i18n.init = ->
 		<select name='locale' id='vtex-locale-select'>
 			<option></option>
 			<option value='pt-BR'>Português Brasileiro</option>
-			<option value='es-AR'>Español Argentino</option>
+			<option value='es'>Español</option>
 			<option value='en-US'>American English</option>
 		</select>
 	"""

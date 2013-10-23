@@ -107,7 +107,6 @@ module.exports = (grunt) ->
 			# the minification process to work. It adds the applicationRoot tag variables before the files address.
 			commit:
 				files:
-					'<%= deployDirectory %>/<%= gitCommit %>/index.html': ['<%= deployDirectory %>/<%= gitCommit %>/index.html']
 					'<%= deployDirectory %>/<%= gitCommit %>/index.debug.html': ['<%= deployDirectory %>/<%= gitCommit %>/index.debug.html']
 
 				options:
@@ -125,7 +124,6 @@ module.exports = (grunt) ->
 			version:
 				files:
 					'<%= deployDirectory %>/<%= versionName() %>/index.html': ['<%= deployDirectory %>/<%= versionName() %>/index.html']
-					'<%= deployDirectory %>/<%= versionName() %>/index.debug.html': ['<%= deployDirectory %>/<%= versionName() %>/index.debug.html']
 
 				options:
 					replacements: [
