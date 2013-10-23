@@ -65,7 +65,7 @@ class VtexI18n
 				return '.'
 
 	translateHtml: (selector = 'html') =>
-		$(selector).i18n() if window.i18n
+		$(selector).i18n?() if window.i18n
 
 	###
 	# Caso o callback seja do tipo function, chama a função
@@ -84,3 +84,6 @@ class VtexI18n
 			radio(@countryCodeCallback).broadcast(val)
 
 $.extend(window.vtex.i18n, new VtexI18n())
+
+# Compatibilidade com versões antigas
+window.vtex.i18n.getCurrencySymbol = window.vtex.i18n.getCurrency
