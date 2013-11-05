@@ -41,6 +41,8 @@ class VtexI18n
 				return 'R$ '
 			when 'USA'
 				return 'US$ '
+			when 'URY'
+				return 'US$ '
 			else
 				return '$ '
 
@@ -50,6 +52,8 @@ class VtexI18n
 			when 'BRA'
 				return ','
 			when 'USA'
+				return '.'
+			when 'URY'
 				return '.'
 			else
 				return ','
@@ -61,6 +65,8 @@ class VtexI18n
 				return '.'
 			when 'USA'
 				return ','
+			when 'URY'
+				return '.'
 			else
 				return '.'
 

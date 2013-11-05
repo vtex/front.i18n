@@ -74,6 +74,8 @@
           return 'R$ ';
         case 'USA':
           return 'US$ ';
+        case 'URY':
+          return 'US$ ';
         default:
           return '$ ';
       }
@@ -85,6 +87,8 @@
         case 'BRA':
           return ',';
         case 'USA':
+          return '.';
+        case 'URY':
           return '.';
         default:
           return ',';
@@ -98,6 +102,8 @@
           return '.';
         case 'USA':
           return ',';
+        case 'URY':
+          return '.';
         default:
           return '.';
       }
