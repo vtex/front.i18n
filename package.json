@@ -1,6 +1,6 @@
 {
 	"name": "front-i18n",
-	"version": "0.3.3",
+	"version": "0.3.4",
 	"readmeFilename": "README.md",
 	"description": "Front end locale selector plugin.",
 	"main": "index.html",
