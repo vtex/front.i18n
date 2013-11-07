@@ -75,7 +75,7 @@
         case 'USA':
           return 'US$ ';
         case 'URY':
-          return 'US$ ';
+          return 'USD ';
         default:
           return '$ ';
       }
