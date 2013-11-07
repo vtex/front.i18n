@@ -42,7 +42,7 @@ class VtexI18n
 			when 'USA'
 				return 'US$ '
 			when 'URY'
-				return 'US$ '
+				return 'USD '
 			else
 				return '$ '
 
