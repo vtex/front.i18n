@@ -7,81 +7,109 @@
   window.vtex.i18n = window.vtex.i18n || {};
 
   VtexI18n = (function() {
-    var countryCode, locale;
-
     function VtexI18n() {
       this.callCountryCodeCallback = __bind(this.callCountryCodeCallback, this);
       this.callLocaleCallback = __bind(this.callLocaleCallback, this);
       this.translateHtml = __bind(this.translateHtml, this);
       this.getThousandsSeparator = __bind(this.getThousandsSeparator, this);
       this.getDecimalSeparator = __bind(this.getDecimalSeparator, this);
+      this.setCurrency = __bind(this.setCurrency, this);
       this.getCurrency = __bind(this.getCurrency, this);
       this.setCountryCodeCallback = __bind(this.setCountryCodeCallback, this);
-      this.setLocaleCallback = __bind(this.setLocaleCallback, this);
       this.setCountryCode = __bind(this.setCountryCode, this);
       this.getCountryCode = __bind(this.getCountryCode, this);
+      this.setLocaleCallback = __bind(this.setLocaleCallback, this);
       this.setLocale = __bind(this.setLocale, this);
       this.getLocale = __bind(this.getLocale, this);
+      this.locale = $('html').attr('lang') || $('meta[name="language"]').attr('content') || 'pt-BR';
+      this.countryCode = $('meta[name="country"]').attr('content') || 'BRA';
+      this.currency = $('meta[name="currency"]').attr('content');
+      this.currency || (this.currency = (function() {
+        switch (this.countryCode) {
+          case 'BRA':
+            return 'BRL';
+          case 'USA':
+            return 'USD';
+          case 'ARG':
+            return 'ARS';
+          case 'URY':
+            return 'UYU';
+          case 'CHL':
+            return 'CLP';
+          case 'COL':
+            return 'COP';
+          case 'ECU':
+            return 'USD';
+          case 'PRY':
+            return 'PYG';
+          case 'PER':
+            return 'PEN';
+          case 'VEN':
+            return 'VEF';
+          default:
+            return 'BRL';
+        }
+      }).call(this));
     }
 
-    locale = null;
-
-    countryCode = null;
-
     VtexI18n.prototype.getLocale = function() {
-      if (locale == null) {
-        locale = $('html').attr('lang') || $('meta[name="language"]').attr('content') || 'pt-BR';
-      }
-      return locale;
+      return this.locale;
     };
 
     VtexI18n.prototype.setLocale = function(localeParam) {
-      locale = localeParam;
+      this.locale = localeParam;
       if (window.i18n) {
-        window.i18n.setLng(locale);
+        window.i18n.setLng(this.locale);
         $('html').i18n();
         if ($("#vtex-locale-select")[0]) {
-          $("#vtex-locale-select").select2("val", locale);
+          $("#vtex-locale-select").select2("val", this.locale);
         }
       }
-      return this.callLocaleCallback(locale);
-    };
-
-    VtexI18n.prototype.getCountryCode = function() {
-      if (countryCode == null) {
-        countryCode = $('meta[name="country"]').attr('content') || 'BRA';
-      }
-      return countryCode;
-    };
-
-    VtexI18n.prototype.setCountryCode = function(countryCodeParam) {
-      countryCode = countryCodeParam;
-      return this.callCountryCodeCallback(countryCode);
+      return this.callLocaleCallback(this.locale);
     };
 
     VtexI18n.prototype.setLocaleCallback = function(callback) {
       return this.localeCallback = callback;
     };
 
+    VtexI18n.prototype.getCountryCode = function() {
+      return this.countryCode;
+    };
+
+    VtexI18n.prototype.setCountryCode = function(countryCodeParam) {
+      this.countryCode = countryCodeParam;
+      return this.callCountryCodeCallback(this.countryCode);
+    };
+
     VtexI18n.prototype.setCountryCodeCallback = function(callback) {
       return this.countryCodeCallback = callback;
     };
 
-    VtexI18n.prototype.getCurrency = function(countryCodeParam) {
-      countryCode = countryCodeParam ? countryCodeParam : window.vtex.i18n.getCountryCode();
-      switch (countryCode) {
-        case 'BRA':
+    VtexI18n.prototype.getCurrency = function() {
+      switch (this.currency) {
+        case 'BRL':
           return 'R$ ';
-        case 'USA':
+        case 'USD':
           return 'US$ ';
-        case 'URY':
-          return 'USD ';
+        case 'CLP':
+          return '$ ';
+        case 'UYU':
+          return '$U ';
+        case 'VEF':
+          return 'Bs. F. ';
+        case 'PYG':
+          return 'Gs ';
         default:
           return '$ ';
       }
     };
 
+    VtexI18n.prototype.setCurrency = function(currency) {
+      return this.currency = currency;
+    };
+
     VtexI18n.prototype.getDecimalSeparator = function(countryCodeParam) {
+      var countryCode;
       countryCode = countryCodeParam ? countryCodeParam : window.vtex.i18n.getCountryCode();
       switch (countryCode) {
         case 'BRA':
@@ -96,6 +124,7 @@
     };
 
     VtexI18n.prototype.getThousandsSeparator = function(countryCodeParam) {
+      var countryCode;
       countryCode = countryCodeParam ? countryCodeParam : window.vtex.i18n.getCountryCode();
       switch (countryCode) {
         case 'BRA':
@@ -146,6 +175,8 @@
   })();
 
   $.extend(window.vtex.i18n, new VtexI18n());
+
+  window.vtex.VtexI18n = VtexI18n;
 
   window.vtex.i18n.getCurrencySymbol = window.vtex.i18n.getCurrency;
 

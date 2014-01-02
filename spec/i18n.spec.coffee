@@ -11,21 +11,20 @@ describe 'i18n', ->
 		beforeEach ->
 			loadFixtures 'complete.html'
 			# Reset variables
-			vtex.i18n.setLocale(null)
-			vtex.i18n.setCountryCode(null)
+			$.extend(window.vtex.i18n, new window.vtex.VtexI18n())
 
 		it 'should set the default locale based on the lang attribute of html tag', ->
-			# Arrange			
-			
+			# Arrange
+
 			# Act
 			locale = vtex.i18n.getLocale()
-			
+
 			# Assert
 			expect(locale).toMatch('en-US')
 
 		it 'should set the default countryCode based on the meta country tag', ->
 			# Arrange
-			
+
 			# Act
 			countryCode = vtex.i18n.getCountryCode()
 
@@ -37,12 +36,11 @@ describe 'i18n', ->
 		beforeEach ->
 			loadFixtures 'meta.html'
 			# Reset variables
-			vtex.i18n.setLocale(null)
-			vtex.i18n.setCountryCode(null)
+			$.extend(window.vtex.i18n, new window.vtex.VtexI18n())
 
 		it 'should set the default locale based on the meta language tag', ->
 			# Arrange
-			
+
 			# Act
 			locale = vtex.i18n.getLocale()
 
@@ -54,12 +52,11 @@ describe 'i18n', ->
 		beforeEach ->
 			loadFixtures 'none.html'
 			# Reset variables
-			vtex.i18n.setLocale(null)
-			vtex.i18n.setCountryCode(null)
+			$.extend(window.vtex.i18n, new window.vtex.VtexI18n())
 
 		it 'should set the default locale to pt-BR', ->
 			# Arrange
-			
+
 			# Act
 			locale = vtex.i18n.getLocale()
 
@@ -68,7 +65,7 @@ describe 'i18n', ->
 
 		it 'should set the default countryCode to BRA', ->
 			# Arrange
-			
+
 			# Act
 			countryCode = vtex.i18n.getCountryCode()
 
@@ -105,20 +102,19 @@ describe 'i18n', ->
 
 		it 'should return the selected currency by default', ->
 			# Arrange
-			vtex.i18n.setCountryCode('BRA')
 
 			# Act
 			currency = vtex.i18n.getCurrency()
-			
+
 			# Assert
 			expect(currency).toMatch(/R\$ /)
 
-		it 'should return the specific currency if countryCode is passed to function', ->
+		it 'should return the specific currency if currency is set by user', ->
 			# Arrange
-			countryCode = 'USA'
+			vtex.i18n.setCurrency('USD')
 
 			# Act
-			currency = vtex.i18n.getCurrency(countryCode)
+			currency = vtex.i18n.getCurrency()
 
 			# Assert
 			expect(currency).toMatch(/US\$ /)

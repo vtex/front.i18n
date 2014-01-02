@@ -21,7 +21,7 @@ describe 'Locale Selector', ->
 
 			# Act
 			translation = i18n.t('foo')
-			
+
 			# Assert
 			expect(translation).toMatch('english bar')
 
@@ -37,10 +37,9 @@ describe 'Locale Selector', ->
 			expect(translation).toMatch('bar portugues')
 
 
-	
-				
 
 
 
 
-	
+
+
