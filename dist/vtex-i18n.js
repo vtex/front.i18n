@@ -27,27 +27,17 @@
       this.currency || (this.currency = (function() {
         switch (this.countryCode) {
           case 'BRA':
-            return 'BRL';
-          case 'USA':
-            return 'USD';
-          case 'ARG':
-            return 'ARS';
+            return 'R$';
           case 'URY':
-            return 'UYU';
-          case 'CHL':
-            return 'CLP';
-          case 'COL':
-            return 'COP';
-          case 'ECU':
-            return 'USD';
+            return '$U';
           case 'PRY':
-            return 'PYG';
+            return 'Gs';
           case 'PER':
-            return 'PEN';
+            return 'S/.';
           case 'VEN':
-            return 'VEF';
+            return 'Bs. F.';
           default:
-            return 'BRL';
+            return '$';
         }
       }).call(this));
     }
@@ -86,22 +76,7 @@
     };
 
     VtexI18n.prototype.getCurrency = function() {
-      switch (this.currency) {
-        case 'BRL':
-          return 'R$ ';
-        case 'USD':
-          return 'US$ ';
-        case 'CLP':
-          return '$ ';
-        case 'UYU':
-          return '$U ';
-        case 'VEF':
-          return 'Bs. F. ';
-        case 'PYG':
-          return 'Gs ';
-        default:
-          return '$ ';
-      }
+      return this.currency + ' ';
     };
 
     VtexI18n.prototype.setCurrency = function(currency) {
@@ -112,8 +87,6 @@
       var countryCode;
       countryCode = countryCodeParam ? countryCodeParam : window.vtex.i18n.getCountryCode();
       switch (countryCode) {
-        case 'BRA':
-          return ',';
         case 'USA':
           return '.';
         case 'URY':
@@ -127,12 +100,8 @@
       var countryCode;
       countryCode = countryCodeParam ? countryCodeParam : window.vtex.i18n.getCountryCode();
       switch (countryCode) {
-        case 'BRA':
-          return '.';
         case 'USA':
           return ',';
-        case 'URY':
-          return '.';
         default:
           return '.';
       }

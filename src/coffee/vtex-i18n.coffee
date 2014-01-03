@@ -8,17 +8,12 @@ class VtexI18n
 		@currency = $('meta[name="currency"]').attr('content')
 		# Default by country code
 		@currency or= switch @countryCode
-			when 'BRA' then 'BRL'
-			when 'USA' then 'USD'
-			when 'ARG' then 'ARS'
-			when 'URY' then 'UYU'
-			when 'CHL' then 'CLP'
-			when 'COL' then 'COP'
-			when 'ECU' then 'USD'
-			when 'PRY' then 'PYG'
-			when 'PER' then 'PEN'
-			when 'VEN' then 'VEF'
-			else 'BRL'
+			when 'BRA' then 'R$'
+			when 'URY' then '$U'
+			when 'PRY' then 'Gs'
+			when 'PER' then 'S/.'
+			when 'VEN' then 'Bs. F.'
+			else '$'
 
 	getLocale: => return @locale
 
@@ -42,15 +37,7 @@ class VtexI18n
 	setCountryCodeCallback: (callback) =>
 		@countryCodeCallback = callback
 
-	getCurrency: =>
-		switch @currency
-			when 'BRL' then return 'R$ '
-			when 'USD' then return 'US$ '
-			when 'CLP' then return '$ '
-			when 'UYU' then return '$U '
-			when 'VEF' then return 'Bs. F. '
-			when 'PYG' then return 'Gs '
-			else return '$ '
+	getCurrency: => return @currency + ' '
 
 	setCurrency: (currency) =>
 		@currency = currency
@@ -58,8 +45,6 @@ class VtexI18n
 	getDecimalSeparator: (countryCodeParam) =>
 		countryCode = if countryCodeParam then countryCodeParam else window.vtex.i18n.getCountryCode()
 		switch countryCode
-			when 'BRA'
-				return ','
 			when 'USA'
 				return '.'
 			when 'URY'
@@ -70,12 +55,8 @@ class VtexI18n
 	getThousandsSeparator: (countryCodeParam) =>
 		countryCode = if countryCodeParam then countryCodeParam else window.vtex.i18n.getCountryCode()
 		switch countryCode
-			when 'BRA'
-				return '.'
 			when 'USA'
 				return ','
-			when 'URY'
-				return '.'
 			else
 				return '.'
 

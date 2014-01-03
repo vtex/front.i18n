@@ -111,13 +111,13 @@ describe 'i18n', ->
 
 		it 'should return the specific currency if currency is set by user', ->
 			# Arrange
-			vtex.i18n.setCurrency('USD')
+			vtex.i18n.setCurrency('$')
 
 			# Act
 			currency = vtex.i18n.getCurrency()
 
 			# Assert
-			expect(currency).toMatch(/US\$ /)
+			expect(currency).toMatch(/\$ /)
 
 	describe 'decimal separator', ->
 
