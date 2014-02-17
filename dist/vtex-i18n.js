@@ -11,7 +11,9 @@
       this.callCountryCodeCallback = __bind(this.callCountryCodeCallback, this);
       this.callLocaleCallback = __bind(this.callLocaleCallback, this);
       this.translateHtml = __bind(this.translateHtml, this);
+      this.setThousandsSeparator = __bind(this.setThousandsSeparator, this);
       this.getThousandsSeparator = __bind(this.getThousandsSeparator, this);
+      this.setDecimalSeparator = __bind(this.setDecimalSeparator, this);
       this.getDecimalSeparator = __bind(this.getDecimalSeparator, this);
       this.setCurrency = __bind(this.setCurrency, this);
       this.getCurrency = __bind(this.getCurrency, this);
@@ -40,6 +42,8 @@
             return '$';
         }
       }).call(this));
+      this.currencyDecimalSeparator;
+      this.currencyThousandsSeparator;
     }
 
     VtexI18n.prototype.getLocale = function() {
@@ -85,6 +89,9 @@
 
     VtexI18n.prototype.getDecimalSeparator = function(countryCodeParam) {
       var countryCode;
+      if (this.currencyDecimalSeparator) {
+        return this.currencyDecimalSeparator;
+      }
       countryCode = countryCodeParam ? countryCodeParam : window.vtex.i18n.getCountryCode();
       switch (countryCode) {
         case 'USA':
@@ -96,8 +103,15 @@
       }
     };
 
+    VtexI18n.prototype.setDecimalSeparator = function(decimalSeparator) {
+      return this.currencyDecimalSeparator = decimalSeparator;
+    };
+
     VtexI18n.prototype.getThousandsSeparator = function(countryCodeParam) {
       var countryCode;
+      if (this.currencyThousandsSeparator) {
+        return this.currencyThousandsSeparator;
+      }
       countryCode = countryCodeParam ? countryCodeParam : window.vtex.i18n.getCountryCode();
       switch (countryCode) {
         case 'USA':
@@ -105,6 +119,10 @@
         default:
           return '.';
       }
+    };
+
+    VtexI18n.prototype.setThousandsSeparator = function(thousandsSeparator) {
+      return this.currencyThousandsSeparator = thousandsSeparator;
     };
 
     VtexI18n.prototype.translateHtml = function(selector) {

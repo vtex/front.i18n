@@ -14,6 +14,8 @@ class VtexI18n
 			when 'PER' then 'S/.'
 			when 'VEN' then 'Bs. F.'
 			else '$'
+		@currencyDecimalSeparator
+		@currencyThousandsSeparator
 
 	getLocale: => return @locale
 
@@ -43,6 +45,7 @@ class VtexI18n
 		@currency = currency
 
 	getDecimalSeparator: (countryCodeParam) =>
+		return @currencyDecimalSeparator if @currencyDecimalSeparator
 		countryCode = if countryCodeParam then countryCodeParam else window.vtex.i18n.getCountryCode()
 		switch countryCode
 			when 'USA'
@@ -52,13 +55,20 @@ class VtexI18n
 			else
 				return ','
 
+	setDecimalSeparator: (decimalSeparator) =>
+		@currencyDecimalSeparator = decimalSeparator
+
 	getThousandsSeparator: (countryCodeParam) =>
+		return @currencyThousandsSeparator if @currencyThousandsSeparator
 		countryCode = if countryCodeParam then countryCodeParam else window.vtex.i18n.getCountryCode()
 		switch countryCode
 			when 'USA'
 				return ','
 			else
 				return '.'
+
+	setThousandsSeparator: (thousandsSeparator) =>
+		@currencyThousandsSeparator = thousandsSeparator
 
 	translateHtml: (selector = 'html') =>
 		$(selector).i18n?() if window.i18n
