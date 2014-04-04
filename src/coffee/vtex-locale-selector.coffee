@@ -2,11 +2,19 @@ window.vtex.i18n.init = ->
 	# Init i18next plugin
 	i18n.init
 		customLoad: (lng, ns, options, loadComplete) =>
-			dictionary = vtex.i18n[lng]
-			if dictionary
-				loadComplete null, dictionary
-			else
-				loadComplete null, vtex.i18n['pt-BR']
+			# Requires languages of VTEX Components
+			if vtex.i18n.requireLang and vtex.curl and require
+			  translationFiles = []
+			  for requireLang in vtex.i18n.requireLang
+			    translationFiles.push(requireLang+lng)
+			  require(translationFiles).then ->
+			    loadComplete null, vtex.i18n[lng]
+			else # Standard way
+				dictionary = vtex.i18n[lng]
+				if dictionary
+					loadComplete null, dictionary
+				else
+					loadComplete null, vtex.i18n['pt-BR']
 		lng: window.vtex.i18n.getLocale()
 		load: 'current'
 		fallbackLng: 'pt-BR'

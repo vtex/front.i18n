@@ -4,12 +4,24 @@
       _this = this;
     i18n.init({
       customLoad: function(lng, ns, options, loadComplete) {
-        var dictionary;
-        dictionary = vtex.i18n[lng];
-        if (dictionary) {
-          return loadComplete(null, dictionary);
+        var dictionary, requireLang, translationFiles, _i, _len, _ref;
+        if (vtex.i18n.requireLang && vtex.curl && require) {
+          translationFiles = [];
+          _ref = vtex.i18n.requireLang;
+          for (_i = 0, _len = _ref.length; _i < _len; _i++) {
+            requireLang = _ref[_i];
+            translationFiles.push(requireLang + lng);
+          }
+          return require(translationFiles).then(function() {
+            return loadComplete(null, vtex.i18n[lng]);
+          });
         } else {
-          return loadComplete(null, vtex.i18n['pt-BR']);
+          dictionary = vtex.i18n[lng];
+          if (dictionary) {
+            return loadComplete(null, dictionary);
+          } else {
+            return loadComplete(null, vtex.i18n['pt-BR']);
+          }
         }
       },
       lng: window.vtex.i18n.getLocale(),
