@@ -28,19 +28,21 @@
       load: 'current',
       fallbackLng: 'pt-BR'
     });
-    this.template = "<select name='locale' id='vtex-locale-select'>\n	<option></option>\n	<option value='pt-BR'>Português Brasileiro</option>\n	<option value='es'>Español</option>\n	<option value='en-US'>American English</option>\n</select>";
-    $('#vtex-locale-selector').html(this.template);
-    if (i18n.t('global.changeLocale') === 'global.changeLocale') {
-      localeText = 'Mudar idioma';
-    } else {
-      localeText = i18n.t('global.changeLocale');
+    if ($().select2 !== null) {
+      this.template = "<select name='locale' id='vtex-locale-select'>\n	<option></option>\n	<option value='pt-BR'>Português Brasileiro</option>\n	<option value='es'>Español</option>\n	<option value='en-US'>American English</option>\n</select>";
+      $('#vtex-locale-selector').html(this.template);
+      if (i18n.t('global.changeLocale') === 'global.changeLocale') {
+        localeText = 'Mudar idioma';
+      } else {
+        localeText = i18n.t('global.changeLocale');
+      }
+      $('#vtex-locale-select').select2({
+        placeholder: localeText
+      });
+      $('#vtex-locale-select').change(function(e, data) {
+        return window.vtex.i18n.setLocale(e.val);
+      });
     }
-    $('#vtex-locale-select').select2({
-      placeholder: localeText
-    });
-    $('#vtex-locale-select').change(function(e, data) {
-      return window.vtex.i18n.setLocale(e.val);
-    });
     $('html').i18n();
   };
 

@@ -19,30 +19,32 @@ window.vtex.i18n.init = ->
 		load: 'current'
 		fallbackLng: 'pt-BR'
 
-	# Template for select2
-	@template = """
-		<select name='locale' id='vtex-locale-select'>
-			<option></option>
-			<option value='pt-BR'>Português Brasileiro</option>
-			<option value='es'>Español</option>
-			<option value='en-US'>American English</option>
-		</select>
-	"""
+	# If it uses select2
+	if $().select2 isnt null
+		# Template for select2
+		@template = """
+			<select name='locale' id='vtex-locale-select'>
+				<option></option>
+				<option value='pt-BR'>Português Brasileiro</option>
+				<option value='es'>Español</option>
+				<option value='en-US'>American English</option>
+			</select>
+		"""
 
-	# Insert template inside vtex-locale-selector element
-	$('#vtex-locale-selector').html(@template)
+		# Insert template inside vtex-locale-selector element
+		$('#vtex-locale-selector').html(@template)
 
-	# Select label
-	if i18n.t('global.changeLocale') is 'global.changeLocale'
-		localeText = 'Mudar idioma'
-	else 
-		localeText = i18n.t('global.changeLocale')
+		# Select label
+		if i18n.t('global.changeLocale') is 'global.changeLocale'
+			localeText = 'Mudar idioma'
+		else
+			localeText = i18n.t('global.changeLocale')
 
-	# Init select2 plugin
-	$('#vtex-locale-select').select2({placeholder: localeText})
+		# Init select2 plugin
+		$('#vtex-locale-select').select2({placeholder: localeText})
 
-	# Change locale when another option is selected
-	$('#vtex-locale-select').change (e, data) => window.vtex.i18n.setLocale(e.val)		
+		# Change locale when another option is selected
+		$('#vtex-locale-select').change (e, data) => window.vtex.i18n.setLocale(e.val)
 
 	# Translate page
 	$('html').i18n()
