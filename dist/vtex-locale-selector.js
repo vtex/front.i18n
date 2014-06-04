@@ -5,14 +5,14 @@
     i18n.init({
       customLoad: function(lng, ns, options, loadComplete) {
         var dictionary, requireLang, translationFiles, _i, _len, _ref;
-        if (vtex.i18n.requireLang && vtex.curl && require) {
+        if (vtex.i18n.requireLang && vtex.curl) {
           translationFiles = [];
           _ref = vtex.i18n.requireLang;
           for (_i = 0, _len = _ref.length; _i < _len; _i++) {
             requireLang = _ref[_i];
             translationFiles.push(requireLang + lng);
           }
-          return require(translationFiles).then(function() {
+          return vtex.curl(translationFiles).then(function() {
             return loadComplete(null, vtex.i18n[lng]);
           });
         } else {

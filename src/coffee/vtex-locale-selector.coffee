@@ -3,11 +3,11 @@ window.vtex.i18n.init = ->
 	i18n.init
 		customLoad: (lng, ns, options, loadComplete) =>
 			# Requires languages of VTEX Components
-			if vtex.i18n.requireLang and vtex.curl and require
+			if vtex.i18n.requireLang and vtex.curl
 			  translationFiles = []
 			  for requireLang in vtex.i18n.requireLang
 			    translationFiles.push(requireLang+lng)
-			  require(translationFiles).then ->
+			  vtex.curl(translationFiles).then ->
 			    loadComplete null, vtex.i18n[lng]
 			else # Standard way
 				dictionary = vtex.i18n[lng]
