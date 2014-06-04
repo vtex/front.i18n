@@ -28,7 +28,7 @@
       load: 'current',
       fallbackLng: 'pt-BR'
     });
-    if ($().select2 !== null) {
+    if ($().select2) {
       this.template = "<select name='locale' id='vtex-locale-select'>\n	<option></option>\n	<option value='pt-BR'>Português Brasileiro</option>\n	<option value='es'>Español</option>\n	<option value='en-US'>American English</option>\n</select>";
       $('#vtex-locale-selector').html(this.template);
       if (i18n.t('global.changeLocale') === 'global.changeLocale') {

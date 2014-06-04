@@ -20,7 +20,7 @@ window.vtex.i18n.init = ->
 		fallbackLng: 'pt-BR'
 
 	# If it uses select2
-	if $().select2 isnt null
+	if $().select2
 		# Template for select2
 		@template = """
 			<select name='locale' id='vtex-locale-select'>
