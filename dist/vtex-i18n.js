@@ -11,6 +11,8 @@
       this.callCountryCodeCallback = __bind(this.callCountryCodeCallback, this);
       this.callLocaleCallback = __bind(this.callLocaleCallback, this);
       this.translateHtml = __bind(this.translateHtml, this);
+      this.setDecimalDigits = __bind(this.setDecimalDigits, this);
+      this.getDecimalDigits = __bind(this.getDecimalDigits, this);
       this.setThousandsSeparator = __bind(this.setThousandsSeparator, this);
       this.getThousandsSeparator = __bind(this.getThousandsSeparator, this);
       this.setDecimalSeparator = __bind(this.setDecimalSeparator, this);
@@ -123,6 +125,24 @@
 
     VtexI18n.prototype.setThousandsSeparator = function(thousandsSeparator) {
       return this.currencyThousandsSeparator = thousandsSeparator;
+    };
+
+    VtexI18n.prototype.getDecimalDigits = function(countryCodeParam) {
+      var countryCode;
+      if (this.currencyDecimalDigits) {
+        return this.currencyDecimalDigits;
+      }
+      countryCode = countryCodeParam ? countryCodeParam : window.vtex.i18n.getCountryCode();
+      switch (countryCode) {
+        case 'PRY':
+          return 0;
+        default:
+          return 2;
+      }
+    };
+
+    VtexI18n.prototype.setDecimalDigits = function(decimalDigits) {
+      return this.currencyDecimalDigits = decimalDigits;
     };
 
     VtexI18n.prototype.translateHtml = function(selector) {

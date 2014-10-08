@@ -70,6 +70,18 @@ class VtexI18n
 	setThousandsSeparator: (thousandsSeparator) =>
 		@currencyThousandsSeparator = thousandsSeparator
 
+	getDecimalDigits: (countryCodeParam) =>
+		return @currencyDecimalDigits if @currencyDecimalDigits
+		countryCode = if countryCodeParam then countryCodeParam else window.vtex.i18n.getCountryCode()
+		switch countryCode
+			when 'PRY'
+				return 0
+			else
+				return 2
+
+	setDecimalDigits: (decimalDigits) =>
+		@currencyDecimalDigits = decimalDigits
+
 	translateHtml: (selector = 'html') =>
 		$(selector).i18n?() if window.i18n
 
