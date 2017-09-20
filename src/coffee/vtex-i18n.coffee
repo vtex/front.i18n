@@ -44,6 +44,11 @@ class VtexI18n
 	setCurrency: (currency) =>
 		@currency = currency
 
+	getStartsWithCurrency:(startsWithCurrency) => return @startsWithCurrency
+
+	setStartsWithCurrency: (startsWithCurrency) =>
+		@startsWithCurrency = startsWithCurrency
+
 	getDecimalSeparator: (countryCodeParam) =>
 		return @currencyDecimalSeparator if @currencyDecimalSeparator
 		countryCode = if countryCodeParam then countryCodeParam else window.vtex.i18n.getCountryCode()

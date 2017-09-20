@@ -1,6 +1,6 @@
 (function() {
   var VtexI18n,
-    __bind = function(fn, me){ return function(){ return fn.apply(me, arguments); }; };
+    bind = function(fn, me){ return function(){ return fn.apply(me, arguments); }; };
 
   window.vtex = window.vtex || {};
 
@@ -8,23 +8,25 @@
 
   VtexI18n = (function() {
     function VtexI18n() {
-      this.callCountryCodeCallback = __bind(this.callCountryCodeCallback, this);
-      this.callLocaleCallback = __bind(this.callLocaleCallback, this);
-      this.translateHtml = __bind(this.translateHtml, this);
-      this.setDecimalDigits = __bind(this.setDecimalDigits, this);
-      this.getDecimalDigits = __bind(this.getDecimalDigits, this);
-      this.setThousandsSeparator = __bind(this.setThousandsSeparator, this);
-      this.getThousandsSeparator = __bind(this.getThousandsSeparator, this);
-      this.setDecimalSeparator = __bind(this.setDecimalSeparator, this);
-      this.getDecimalSeparator = __bind(this.getDecimalSeparator, this);
-      this.setCurrency = __bind(this.setCurrency, this);
-      this.getCurrency = __bind(this.getCurrency, this);
-      this.setCountryCodeCallback = __bind(this.setCountryCodeCallback, this);
-      this.setCountryCode = __bind(this.setCountryCode, this);
-      this.getCountryCode = __bind(this.getCountryCode, this);
-      this.setLocaleCallback = __bind(this.setLocaleCallback, this);
-      this.setLocale = __bind(this.setLocale, this);
-      this.getLocale = __bind(this.getLocale, this);
+      this.callCountryCodeCallback = bind(this.callCountryCodeCallback, this);
+      this.callLocaleCallback = bind(this.callLocaleCallback, this);
+      this.translateHtml = bind(this.translateHtml, this);
+      this.setDecimalDigits = bind(this.setDecimalDigits, this);
+      this.getDecimalDigits = bind(this.getDecimalDigits, this);
+      this.setThousandsSeparator = bind(this.setThousandsSeparator, this);
+      this.getThousandsSeparator = bind(this.getThousandsSeparator, this);
+      this.setDecimalSeparator = bind(this.setDecimalSeparator, this);
+      this.getDecimalSeparator = bind(this.getDecimalSeparator, this);
+      this.setStartsWithCurrency = bind(this.setStartsWithCurrency, this);
+      this.getStartsWithCurrency = bind(this.getStartsWithCurrency, this);
+      this.setCurrency = bind(this.setCurrency, this);
+      this.getCurrency = bind(this.getCurrency, this);
+      this.setCountryCodeCallback = bind(this.setCountryCodeCallback, this);
+      this.setCountryCode = bind(this.setCountryCode, this);
+      this.getCountryCode = bind(this.getCountryCode, this);
+      this.setLocaleCallback = bind(this.setLocaleCallback, this);
+      this.setLocale = bind(this.setLocale, this);
+      this.getLocale = bind(this.getLocale, this);
       this.locale = $('html').attr('lang') || $('meta[name="language"]').attr('content') || 'pt-BR';
       this.countryCode = $('meta[name="country"]').attr('content') || 'BRA';
       this.currency = $('meta[name="currency"]').attr('content');
@@ -89,6 +91,14 @@
       return this.currency = currency;
     };
 
+    VtexI18n.prototype.getStartsWithCurrency = function(startsWithCurrency) {
+      return this.startsWithCurrency;
+    };
+
+    VtexI18n.prototype.setStartsWithCurrency = function(startsWithCurrency) {
+      return this.startsWithCurrency = startsWithCurrency;
+    };
+
     VtexI18n.prototype.getDecimalSeparator = function(countryCodeParam) {
       var countryCode;
       if (this.currencyDecimalSeparator) {
@@ -146,20 +156,20 @@
     };
 
     VtexI18n.prototype.translateHtml = function(selector) {
-      var _base;
+      var base;
       if (selector == null) {
         selector = 'html';
       }
       if (window.i18n) {
-        return typeof (_base = $(selector)).i18n === "function" ? _base.i18n() : void 0;
+        return typeof (base = $(selector)).i18n === "function" ? base.i18n() : void 0;
       }
     };
 
-    /*
-    	# Caso o callback seja do tipo function, chama a função
-    	# Caso seja do tipo string assume-se que será chamado um canal do Radio
-    */
 
+    /*
+    	 * Caso o callback seja do tipo function, chama a função
+    	 * Caso seja do tipo string assume-se que será chamado um canal do Radio
+     */
 
     VtexI18n.prototype.callLocaleCallback = function(val) {
       if (typeof this.localeCallback === 'function') {
