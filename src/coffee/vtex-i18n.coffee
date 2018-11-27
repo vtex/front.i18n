@@ -76,7 +76,7 @@ class VtexI18n
 		@currencyThousandsSeparator = thousandsSeparator
 
 	getDecimalDigits: (countryCodeParam) =>
-		return @currencyDecimalDigits if @currencyDecimalDigits
+		return @currencyDecimalDigits if @currencyDecimalDigits?
 		countryCode = if countryCodeParam then countryCodeParam else window.vtex.i18n.getCountryCode()
 		switch countryCode
 			when 'PRY'
