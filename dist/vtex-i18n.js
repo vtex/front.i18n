@@ -139,7 +139,7 @@
 
     VtexI18n.prototype.getDecimalDigits = function(countryCodeParam) {
       var countryCode;
-      if (this.currencyDecimalDigits) {
+      if (this.currencyDecimalDigits != null) {
         return this.currencyDecimalDigits;
       }
       countryCode = countryCodeParam ? countryCodeParam : window.vtex.i18n.getCountryCode();
